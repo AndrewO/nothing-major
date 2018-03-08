@@ -1,0 +1,30 @@
+{
+  "name": "nothing-major",
+  "version": "1.0.0",
+  "description": "Ensures that you've marked your breaking change commits.",
+  "bin": {
+    "nothing-major": "cli.js"
+  },
+  "scripts": {
+    "test": "ava"
+  },
+  "author": "Andrew O'Brien <obrien.andrew@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "cz-conventional-changelog": "^2.1.0"
+  },
+  "dependencies": {
+    "conventional-changelog-angular": "^1.6.6",
+    "conventional-recommended-bump": "^2.0.6",
+    "debug": "^3.1.0",
+    "execa": "^0.9.0",
+    "meow": "^4.0.0",
+    "tempy": "^0.2.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
