@@ -1,6 +1,7 @@
 {
   "name": "nothing-major",
   "version": "1.0.0",
+  "author": "Andrew O'Brien <obrien.andrew@gmail.com>",
   "description": "Ensures that you've marked your breaking change commits.",
   "bin": {
     "nothing-major": "cli.js"
