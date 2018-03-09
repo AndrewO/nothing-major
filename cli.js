@@ -52,9 +52,10 @@ debug.enabled = args.flags.verbose;
   
   const tempDir = tempy.directory();
   debug('Checkout out worktree to %s', tempDir);
-  debug('Directory exists?: %s', fs.existsSync(tempDir));
-  debug('ls: %s', execa.sync('ls', ['-l', tempDir]));
-  await pipeToParent(execa('git', ['worktree', 'add', '--detach', tempDir]));
+  // GIT_INDEX_FILE does... something bad with `git-worktree`. This only shows up when run inside of a `git-hook`.
+  // More info: https://stackoverflow.com/a/7645492/1603984
+  const childEnv = Object.assign({}, process.env, {GIT_INDEX_FILE: undefined});
+  await pipeToParent(execa('git', ['worktree', 'add', '--detach', tempDir], {env: childEnv}));
 
   process.on('exit', () => { cleanup(tempDir) });
 
