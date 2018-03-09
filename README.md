@@ -33,3 +33,7 @@ The intention is that this would be setup to run as a [`post-commit`](https://gi
 ### Debugging
 
 The script uses the [`debug`](https://www.npmjs.com/package/debug) library. Debugging can be turned on with the `-v` or `--verbose` flag or the `DEBUG='nothing-major'` environment variable.
+
+## Related Work
+
+Similar breaking change detection functionality is provided by [`cracks`](https://github.com/semantic-release/cracks/). `cracks` checks test files out in the same directory, which can cause lost changes if run on an uncommitted directory. As it hasn't been updated in awhile, I decided to write something fresh.

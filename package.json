@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "author": "Andrew O'Brien <obrien.andrew@gmail.com>",
   "description": "Ensures that you've marked your breaking change commits.",
+  "keywords":  [
+    "breaking",
+    "change",
+    "detection",
+    "semver",
+    "package"
+  ],
   "bin": {
     "nothing-major": "cli.js"
   },
