@@ -4,6 +4,8 @@ Ensures that you've marked your breaking change commits.
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
+[![NPM](https://nodei.co/npm/nothing-major.png?downloads=true&stars=true)](https://nodei.co/npm/nothing-major/)
+
 ## Usage
 
 Right now, this assumes that you're using the [Angular commit message format](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits). In the future, this may be configurable.
