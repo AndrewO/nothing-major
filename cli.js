@@ -67,7 +67,7 @@ debug.enabled = args.flags.verbose;
   }
 
   debug('Checking out test files: %s', testFiles);
-  await pipeToParent(execa('git', ['checkout', 'HEAD^', '--'].concat(...testFiles), {cwd: tempDir}));
+  await pipeToParent(execa('git', ['checkout', 'HEAD^', '--'].concat(...testFiles), {cwd: tempDir, env: childEnv}));
 
   debug('Running test with command: %s', testCommand);
   await pipeToParent(execa.shell(testCommand, {cwd: tempDir}))
