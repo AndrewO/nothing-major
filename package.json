@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Andrew O'Brien <obrien.andrew@gmail.com>",
   "description": "Ensures that you've marked your breaking change commits.",
-  "keywords":  [
+  "keywords": [
     "breaking",
     "change",
     "detection",
@@ -18,13 +18,17 @@
     "nothing-major": "cli.js"
   },
   "scripts": {
-    "test": "ava"
+    "pretest": "cd fixtures && ./build.sh ../tmp",
+    "test": "bats *.bats",
+    "commitmsg": "node cli.js -b 'npm install' -t 'npm test' test.bats",
+    "release": "standard-version"
   },
-  "author": "Andrew O'Brien <obrien.andrew@gmail.com>",
   "license": "ISC",
   "devDependencies": {
-    "ava": "^0.25.0",
-    "cz-conventional-changelog": "^2.1.0"
+    "bats": "^0.4.2",
+    "cz-conventional-changelog": "^2.1.0",
+    "husky": "^0.14.3",
+    "standard-version": "^4.3.0"
   },
   "dependencies": {
     "conventional-changelog-angular": "^1.6.6",

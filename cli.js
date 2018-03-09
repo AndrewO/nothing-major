@@ -7,6 +7,8 @@ const meow = require('meow');
 const execa = require('execa');
 const conventionalRecommendedBump = promisify(require(`conventional-recommended-bump`));
 
+const fs = require('fs');
+
 const args = meow(`
   Usage
     $ nothing-major [[test files]]
@@ -34,7 +36,7 @@ const args = meow(`
 })
 
 const preset = "angular"; // TODO: support others
-const buildCommand = args.flags.build || showHelp();
+const buildCommand = args.flags.build;
 const testCommand = args.flags.test || showHelp();
 const testFiles = Array.isArray(args.input) ? args.input : showHelp();
 debug.enabled = args.flags.verbose;
@@ -50,12 +52,18 @@ debug.enabled = args.flags.verbose;
   
   const tempDir = tempy.directory();
   debug('Checkout out worktree to %s', tempDir);
+  debug('Directory exists?: %s', fs.existsSync(tempDir));
+  debug('ls: %s', execa.sync('ls', ['-l', tempDir]));
   await pipeToParent(execa('git', ['worktree', 'add', '--detach', tempDir]));
 
   process.on('exit', () => { cleanup(tempDir) });
 
-  debug('Building project in temporary directory with: %s', buildCommand);
-  await pipeToParent(execa.shell(buildCommand, {cwd: tempDir}));
+  if (typeof buildCommand === "string") {
+    debug('Building project in temporary directory with: %s', buildCommand);
+    await pipeToParent(execa.shell(buildCommand, {cwd: tempDir}));  
+  } else {
+    debug('No build command given');
+  }
 
   debug('Checking out test files: %s', testFiles);
   await pipeToParent(execa('git', ['checkout', 'HEAD^', '--'].concat(...testFiles), {cwd: tempDir}));
